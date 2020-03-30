@@ -2,7 +2,6 @@ import express from "express";
 import redis from "redis";
 import cors from "cors";
 
-console.log(cors);
 const app = express();
 const corsOptions: cors.CorsOptions = {
     origin: [
