@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+    web:
+        build: ./app/
+        stdin_open: true
+        depends_on:
+            - api
+        volumes:
+            - ./app/:/usr/src/app/
+        environment:
+            - NODE_ENV=development
+            - REACT_APP_API_BASE_URL=http://localhost:8080
+        ports: 
+            - 3001:3000
+    api:
+        build: ./api/
+        environment: 
+            - REDIS_HOST=cache
+            - REDIS_PORT=6379
+        links:
+            - redis
+        ports:
+            - 8080:8090
+    redis:
+        image: redis
+        container_name: cache
+        volumes:
+            - ./redis-data:/bitnami/redis/data
+        expose:
+            - 6379
