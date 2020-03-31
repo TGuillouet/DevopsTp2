@@ -4,11 +4,13 @@ ENV PORT 8090
 
 WORKDIR /srv/app/
 
-COPY package.json .
+RUN apk update && apk add git && apk add curl
+
+RUN curl -o- -L https://yarnpkg.com/install.sh | sh
+
+RUN git clone 
 
 RUN yarn
-
-COPY . .
 
 EXPOSE ${PORT}
 
